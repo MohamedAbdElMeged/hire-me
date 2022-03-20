@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       delete '/logout', to:"users#logout"
       post "/complete_profile",to: "profiles#create_profile"
       put "/edit_profile",to: "profiles#edit_profile"
-
+      resources :jobs
     end
   end
 end
