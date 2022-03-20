@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_12_172445) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_20_182722) do
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -33,9 +33,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_172445) do
     t.string "level"
     t.string "job_type"
     t.string "years_of_exp"
+    t.bigint "recruiter_id"
+    t.boolean "is_active"
     t.index ["company_id"], name: "index_jobs_on_company_id"
     t.index ["country_id"], name: "index_jobs_on_country_id"
     t.index ["location_id"], name: "index_jobs_on_location_id"
+    t.index ["recruiter_id"], name: "index_jobs_on_recruiter_id"
   end
 
   create_table "jobs_skills", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -86,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_172445) do
   add_foreign_key "jobs", "companies"
   add_foreign_key "jobs", "countries"
   add_foreign_key "jobs", "locations"
+  add_foreign_key "jobs", "users", column: "recruiter_id"
   add_foreign_key "profiles", "companies"
   add_foreign_key "profiles", "users"
 end
