@@ -5,14 +5,13 @@ module CompanyServices
         end
         def call
             create_company
-            @company_id
+            @company
         end
         private
         def create_company
-            if @name && !@name.empty?
-                @company_id = Company.find_or_create_by(name:@name).id
-            end
-            
+            @company= Company.find_or_create_by(name:@name)
+        
+        
         end
         
         

@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
     def register
         user = User.new(user_params)
         if user.save!
-            user.auth_token = create_token(user.get_default_data,10)
+            user.auth_token = create_token(user.get_default_data,900)
             render json: {token: user.auth_token}
         else
             render json: user.errors
@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
     def login
         user = User.find_by(email: params[:email])
         if user.valid_password?(params[:password])
-            user.auth_token = create_token(user.get_default_data,10)
+            user.auth_token = create_token(user.get_default_data,900)
             render json: {token: user.auth_token}
         else
             render json: {message: "Invalid Credentials"},status: 401
