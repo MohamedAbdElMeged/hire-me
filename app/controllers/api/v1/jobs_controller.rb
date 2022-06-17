@@ -1,9 +1,13 @@
 class Api::V1::JobsController < ApplicationController
-    before_action :authorized,except: [:index]
-    before_action :logged_in_user,except: [:index]
-    before_action :set_job, except: [:create,:index]
+    # before_action :authorized,except: [:index,:sample_jobs]
+    # before_action :logged_in_user,except: [:index,:sample_jobs]
+    # before_action :set_job, except: [:create,:index,:sample_jobs]
     def index
         @jobs = Job.includes(:skills).is_active
+        render json: @jobs
+    end
+    def sample_jobs
+        @jobs = Job.includes(:skills).take(5)
         render json: @jobs
     end
     def create
